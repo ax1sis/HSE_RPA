@@ -27,18 +27,18 @@ if not os.path.isdir(folder_for_pdf):
     os.mkdir(folder_for_pdf)
 
 # webdriver
-#chrome_options = Options()
-#prefs = {"download.default_directory": folder_for_pdf, "download.prompt_for_download": False}
-#chrome_options.add_experimental_option('prefs', prefs)
-#os.environ[
-    #"webdriver.chrome.driver"] = webdriver_path  # 'webdriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+chrome_options = Options()
+prefs = {"download.default_directory": folder_for_pdf, "download.prompt_for_download": False}
+chrome_options.add_experimental_option('prefs', prefs)
+os.environ[
+    "webdriver.chrome.driver"] = webdriver_path  # 'webdriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
 
 links_list = [query_link + str(page + 1) for page in range(num_page)]  # create links to follow
 
 #driver = webdriver.Chrome(executable_path=webdriver_path, chrome_options=chrome_options)
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=chrome_options)
 
 final_info = []  # empty dictionary for articles info
 
